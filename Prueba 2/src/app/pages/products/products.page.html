@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar colo="dark">
+    <ion-title>Catalogo</ion-title>
+  </ion-toolbar>
+  <ion-toolbar colo="dark">
+    <ion-back-button text="Perfil" slot="start" [routerLink]="['/profile', idUsuario]"></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" fill="outline" color="danger" [routerLink]="['/cart']">Ver Carro</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <br>
+    <ion-item *ngFor="let productos of servicio.listaProductos$ | async" detail="true">
+      <ion-avatar slot="start">
+        <img [alt]="'Imagen '" [src]="productos.thumbnail"/>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{productos.title}}</h3>
+        <p class="azul">$ {{productos.price}}</p>
+        <p class="verde">{{productos.discountPercentage}} %</p>
+      </ion-label>
+    </ion-item>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="cargarMasElementos()">
+    <ion-infinite-scroll-content loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
